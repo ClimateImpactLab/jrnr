@@ -15,7 +15,8 @@ import itertools
 import functools
 import subprocess
 
-from _compat import exclusive_open
+from __future__ import absolute_import
+from jrnr._compat import exclusive_open
 
 FORMAT = '%(asctime)-15s %(message)s'
 
