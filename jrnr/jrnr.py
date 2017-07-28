@@ -3,6 +3,8 @@ Utilities for running jobs on differnent platforms
 
 '''
 
+from __future__ import absolute_import
+
 import re
 import os
 import time
@@ -15,7 +17,6 @@ import itertools
 import functools
 import subprocess
 
-from __future__ import absolute_import
 from jrnr._compat import exclusive_open
 
 FORMAT = '%(asctime)-15s %(message)s'
