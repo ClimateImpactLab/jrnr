@@ -1,6 +1,5 @@
 '''
-Utilities for running jobs on differnent platforms
-
+Tools for running impact functions forecasts
 '''
 
 from __future__ import absolute_import
