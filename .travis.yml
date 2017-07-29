@@ -7,7 +7,7 @@ deploy:
     repo: ClimateImpactLab/jrnr
     tags: true
   distributions: sdist bdist_wheel
-  user: jgerardsimcock
+  user: justin_gerard
   provider: pypi
   password:
     secure: !!binary |
