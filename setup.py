@@ -28,7 +28,7 @@ test_requirements = [
 
 setup(
     name='jrnr',
-    version='0.1.1',
+    version='0.1.2',
     description="Job Runner for Climate Impact Lab Jobs",
     long_description=readme + '\n\n' + history,
     author="Justin Simcock",
