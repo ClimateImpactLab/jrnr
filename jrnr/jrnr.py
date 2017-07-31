@@ -1,6 +1,3 @@
-'''
-Tools for running impact functions forecasts
-'''
 
 from __future__ import absolute_import
 
@@ -234,12 +231,15 @@ def get_job_by_index(job_spec, index):
         ...        [{'num': 1}, {'num': 2}, {'num': 3}],
         ...        [{'pitch': 'do'}, {'pitch': 'rey'}, {'pitch': 'mi'}]),
         ...    5)
-        ... 
+        ...
         >>> sorted(zip(job.keys(), job.values())) # test job ordered
         [('let', 'a'), ('num', 2), ('pitch', 'mi')]
 
         >>> job = get_job_by_index(
-        ...     tuple(map(lambda x: [{x: i} for i in x], ['hi', 'hello', 'bye'])), 10)
+        ...     tuple(map(
+        ...         lambda x: [{x: i} for i in x],
+        ...         ['hi', 'hello', 'bye'])),
+        ...     10)
         ...
         >>> sorted(zip(job.keys(), job.values())) # test job ordered
         [('bye', 'y'), ('hello', 'l'), ('hi', 'h')]
@@ -267,14 +267,18 @@ def _get_call_args(job_spec, index=0):
         >>> job = _get_call_args(job_spec, 2)
         >>> job # doctest: +SKIP
         {'age': 8, 'letter': 'b', 'name': 'susie', 'ordinal': 1, 'zeroth': 0}
-        
+
         >>> notmeta = {k: v for k, v in job.items() if k != 'metadata'}
         >>> meta = job['metadata']
-        >>> sorted(zip(notmeta.keys(), notmeta.values())) # test notmeta ordered
-        [('age', 8), ('letter', 'b'), ('name', 'susie'), ('ordinal', 1), ('zeroth', 0)]
+        >>> sorted(zip(notmeta.keys(), notmeta.values())) \
+        # doctest: +NORMALIZE_WHITESPACE
+        [('age', 8), ('letter', 'b'), ('name', 'susie'),
+        ('ordinal', 1), ('zeroth', 0)]
 
-        >>> sorted(zip(meta.keys(), meta.values())) # test meta ordered
-        [('age', '8'), ('letter', 'b'), ('name', 'susie'), ('ordinal', '1'), ('zeroth', '0')]
+        >>> sorted(zip(meta.keys(), meta.values())) \
+        # doctest: +NORMALIZE_WHITESPACE
+        [('age', '8'), ('letter', 'b'), ('name', 'susie'),
+        ('ordinal', '1'), ('zeroth', '0')]
     '''
 
     job = get_job_by_index(job_spec, index)
@@ -286,6 +290,7 @@ def _get_call_args(job_spec, index=0):
     call_args.update(job)
 
     return call_args
+
 
 @toolz.curry
 def slurm_runner(run_job, filepath, job_spec, onfinish=None):
@@ -432,7 +437,7 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
             if os.path.exists(lock_file.format('done')):
                 print('{} already done. skipping'.format(task_id))
                 continue
-                
+
             elif os.path.exists(lock_file.format('err')):
                 print('{} previously errored. skipping'.format(task_id))
                 continue
@@ -446,7 +451,7 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
                     print('{} already done. skipping'.format(task_id))
                     if os.path.exists(lock_file.format('lck')):
                         os.remove(lock_file.format('lck'))
-                
+
                 elif os.path.exists(lock_file.format('err')):
                     print('{} previously errored. skipping'.format(task_id))
                     if os.path.exists(lock_file.format('lck')):
@@ -518,7 +523,11 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
 
         print(
             ("\n".join(["{{:<15}}{{:{}d}}".format(count) for _ in range(4)]))
-            .format('jobs:', n, 'done:', done, 'in progress:', locked, 'errored:', err))
+            .format(
+                'jobs:', n,
+                'done:', done,
+                'in progress:', locked,
+                'errored:', err))
 
     @slurm.command()
     @click.option('--job_name', required=True)
@@ -532,7 +541,6 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
                         .format(job_name, job_id, task_id)):
                 time.sleep(10)
 
-    
     def run_interactive(task_id=0):
 
         job_kwargs = _get_call_args(job_spec, task_id)
@@ -540,7 +548,7 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
         logger.debug('Beginning job\nkwargs:\t{}'.format(
             pprint.pformat(job_kwargs['metadata'], indent=2)))
 
-        return run_job(**job_kwargs)
+        return run_job(interactive=True, **job_kwargs)
 
     slurm.run_interactive = run_interactive
 
