@@ -2,10 +2,15 @@
 History
 =======
 
-0.1.3 (Current Version)
+0.2.1 (Current Version)
 -----------------------
 
+
+0.2.0 (2017-07-31)
+------------------
+
 * Fix interactive bug -- call interactive=True on `slurm_runner.run_interactive()` (:issue:`1`)
+* Add slurm_runner as module-level import
 
 
 0.1.2 (2017-07-28)
