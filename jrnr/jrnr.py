@@ -1,9 +1,3 @@
-'''
-Tools for running impact functions forecasts
-'''
-
-from __future__ import absolute_import
-
 import re
 import os
 import time
@@ -16,7 +10,7 @@ import itertools
 import functools
 import subprocess
 
-from jrnr._compat import exclusive_open
+from _compat import exclusive_open
 
 FORMAT = '%(asctime)-15s %(message)s'
 
@@ -540,7 +534,7 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
         logger.debug('Beginning job\nkwargs:\t{}'.format(
             pprint.pformat(job_kwargs['metadata'], indent=2)))
 
-        return run_job(**job_kwargs)
+        return run_job(interactive=True, **job_kwargs)
 
     slurm.run_interactive = run_interactive
 
