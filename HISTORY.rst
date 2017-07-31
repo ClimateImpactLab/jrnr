@@ -5,11 +5,13 @@ History
 0.2.1 (Current Version)
 -----------------------
 
+* Fix bug in ``slurm_runner.do_job`` which caused job duplication when race conditions on lock object creation occur (:issue:`3`)
+
 
 0.2.0 (2017-07-31)
 ------------------
 
-* Fix interactive bug -- call interactive=True on `slurm_runner.run_interactive()` (:issue:`1`)
+* Fix interactive bug -- call interactive=True on ``slurm_runner.run_interactive()`` (:issue:`1`)
 * Add slurm_runner as module-level import
 
 
