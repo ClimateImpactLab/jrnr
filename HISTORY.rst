@@ -5,7 +5,7 @@ History
 0.2.1 (Current Version)
 -----------------------
 
-* Infer filepath from passed function in ``slurm_runner``. Removes need to supply filepath argument in ``slurm_runner` function calls (:issue:`5`)
+* Infer filepath from passed function in ``slurm_runner``. Removes need to supply filepath argument in ``slurm_runner`` function calls (:issue:`5`)
 
 0.2.0 (2017-07-31)
 ------------------
