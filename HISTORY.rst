@@ -5,11 +5,12 @@ History
 0.2.1 (Current Version)
 -----------------------
 
+* Infer filepath from passed function in ``slurm_runner``.
 
 0.2.0 (2017-07-31)
 ------------------
 
-* Fix interactive bug -- call interactive=True on `slurm_runner.run_interactive()` (:issue:`1`)
+* Fix interactive bug -- call interactive=True on ``slurm_runner.run_interactive()`` (:issue:`1`)
 * Add slurm_runner as module-level import
 
 
