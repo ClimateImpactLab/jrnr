@@ -18,7 +18,8 @@ requirements = [
 
 setup_requirements = [
     'pytest-runner',
-    # TODO(jgerardsimcock): put setup requirements (distutils extensions, etc.) here
+    # TODO(jgerardsimcock):
+    # put setup requirements (distutils extensions, etc.) here
 ]
 
 test_requirements = [
@@ -28,7 +29,7 @@ test_requirements = [
 
 setup(
     name='jrnr',
-    version='0.1.1',
+    version='0.2.0',
     description="Job Runner for Climate Impact Lab Jobs",
     long_description=readme + '\n\n' + history,
     author="Justin Simcock",

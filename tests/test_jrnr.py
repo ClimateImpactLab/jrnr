@@ -6,8 +6,8 @@
 import pytest
 from click.testing import CliRunner
 
-from jrnr import jrnr
 from jrnr import cli
+
 
 @pytest.fixture
 def response():
