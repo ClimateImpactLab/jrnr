@@ -451,11 +451,13 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
                     print('{} already done. skipping'.format(task_id))
                     if os.path.exists(lock_file.format('lck')):
                         os.remove(lock_file.format('lck'))
+                    continue
 
                 elif os.path.exists(lock_file.format('err')):
                     print('{} previously errored. skipping'.format(task_id))
                     if os.path.exists(lock_file.format('lck')):
                         os.remove(lock_file.format('lck'))
+                    continue
 
             except OSError:
                 print('{} already in progress. skipping'.format(task_id))
