@@ -10,6 +10,7 @@ import click
 import pprint
 import logging
 import inspect
+import warnings
 import itertools
 import functools
 import subprocess
@@ -298,6 +299,12 @@ def slurm_runner(run_job, job_spec, filepath=None, onfinish=None):
 
     if filepath is None:
         filepath = os.path.abspath(inspect.getfile(run_job))
+    else:
+        warning = (
+            "the `filepath` argument is deprecated and will be " +
+            "removed in the future.")
+
+        warnings.warn(warning, FutureWarning)
 
     @click.group()
     def slurm():
