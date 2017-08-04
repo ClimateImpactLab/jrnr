@@ -12,6 +12,7 @@ import toolz
 import click
 import pprint
 import logging
+import inspect
 import itertools
 import functools
 import subprocess
@@ -288,7 +289,10 @@ def _get_call_args(job_spec, index=0):
     return call_args
 
 @toolz.curry
-def slurm_runner(run_job, filepath, job_spec, onfinish=None):
+def slurm_runner(run_job, job_spec, filepath=None, onfinish=None):
+
+    if filepath is None:
+        filepath = os.path.abspath(inspect.getfile(run_job))
 
     @click.group()
     def slurm():
@@ -540,7 +544,7 @@ def slurm_runner(run_job, filepath, job_spec, onfinish=None):
         logger.debug('Beginning job\nkwargs:\t{}'.format(
             pprint.pformat(job_kwargs['metadata'], indent=2)))
 
-        return run_job(**job_kwargs)
+        return run_job(interactive=True, **job_kwargs)
 
     slurm.run_interactive = run_interactive
 
