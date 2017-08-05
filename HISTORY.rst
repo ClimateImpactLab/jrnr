@@ -6,7 +6,7 @@ History
 -----------------------
 
 * Fix bug in ``slurm_runner.do_job`` which caused job duplication when race conditions on lock object creation occur (:issue:`3`)
-
+* Infer filepath from passed function in ``slurm_runner``. Removes need to supply filepath argument in ``slurm_runner`` function calls (:issue:`5`)
 
 0.2.0 (2017-07-31)
 ------------------

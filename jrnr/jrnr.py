@@ -9,6 +9,8 @@ import toolz
 import click
 import pprint
 import logging
+import inspect
+import warnings
 import itertools
 import functools
 import subprocess
@@ -293,7 +295,16 @@ def _get_call_args(job_spec, index=0):
 
 
 @toolz.curry
-def slurm_runner(run_job, filepath, job_spec, onfinish=None):
+def slurm_runner(run_job, job_spec, filepath=None, onfinish=None):
+
+    if filepath is None:
+        filepath = os.path.abspath(inspect.getfile(run_job))
+    else:
+        warning = (
+            "the `filepath` argument is deprecated and will be " +
+            "removed in the future.")
+
+        warnings.warn(warning, FutureWarning)
 
     @click.group()
     def slurm():
