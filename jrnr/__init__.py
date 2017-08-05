@@ -7,7 +7,7 @@ from jrnr.jrnr import slurm_runner
 
 __author__ = """Justin Simcock"""
 __email__ = 'jsimcock@rhg.com'
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 _module_imports = (
     slurm_runner,
