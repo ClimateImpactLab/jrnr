@@ -295,7 +295,40 @@ def _get_call_args(job_spec, index=0):
 
 
 @toolz.curry
-def slurm_runner(run_job, job_spec, filepath=None, onfinish=None):
+def slurm_runner(run_job, job_spec, filepath=None, onfinish=None, return_index=False):
+    '''
+    Decorator to create a SLURM runner job management command-line application
+
+    Parameters
+    ----------
+
+    run_job : function
+        Function executed for each task specified by ``job_spec``. ``run_job``
+        must be of the form ``run_job(metadata, interactive=False, **kwargs)``
+        where ``kwargs`` is the set of keyword terms specified by ``job_spec``.
+    
+    job_spec : tuple of lists of dicts
+        Job specification in the format ``([{kwargs: vals}, ...], [...], ...)``.
+        ``slurm_runner`` will iterate through all combinations of the lists in
+        ``job_spec``, combining paired kwarg dictionaries and passing them as
+        arguments to ``run_job``.
+    
+    filepath : str, optional
+        Path to file to call when running tasks. By default (None), slurm_runner
+        infers the filepath from the location of ``run_job``.
+    
+    onfinish : function, optional
+        Provide a function to call when all jobs have been completed. Default (None)
+        takes no action.
+    
+    return_index : bool, optional
+        Adds a ``task_id`` argument to run_job call with 0-indexed ID of current task
+
+    Returns
+    -------
+    slurm_runner : click.Group
+        A SLURM runner job management command-line application
+    '''
 
     if filepath is None:
         filepath = os.path.abspath(inspect.getfile(run_job))
@@ -485,6 +518,9 @@ def slurm_runner(run_job, job_spec, filepath=None, onfinish=None):
             try:
 
                 job_kwargs = _get_call_args(job_spec, task_id)
+                
+                if return_index:
+                    job_kwargs.update({'task_id': task_id})
 
                 logger.debug('Beginning job\nkwargs:\t{}'.format(
                     pprint.pformat(job_kwargs['metadata'], indent=2)))
@@ -560,6 +596,9 @@ def slurm_runner(run_job, job_spec, filepath=None, onfinish=None):
 
         logger.debug('Beginning job\nkwargs:\t{}'.format(
             pprint.pformat(job_kwargs['metadata'], indent=2)))
+                
+        if return_index:
+             job_kwargs.update({'task_id': task_id})
 
         return run_job(interactive=True, **job_kwargs)
 
