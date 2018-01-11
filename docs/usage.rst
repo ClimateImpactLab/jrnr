@@ -10,6 +10,46 @@ At the top of your python module add this to the `import` section::
 
     from jrnr.jrnr import slurm_runner
 
+Interactive mode
+~~~~~~~~~~~~~~~~
+
+Frequently, you'll want to do some basic debugging and iteration to make sure your batch jobs will run as expected. To assist this process, `jrnr` has an interactive mode that allows you to run a single job in an `ipython` session. 
+
+.. code-block:: ipython
+
+    In [1]: import tas
+
+    In [2]: tas.make_tas.run_interactive(42)
+
+    2018-01-10 17:01:55,001 Beginning job
+    kwargs: { 'model': 'NorESM1-M', 'scenario': 'rcp45', 'year': '2054'}
+    2018-01-10 17:02:43,733 beginning
+    2018-01-10 17:02:43,733 producing_tas
+    Out[3]: 
+    <xarray.Dataset>
+    Dimensions:  (lat: 720, lon: 1440, time: 365)
+    Coordinates:
+      * lon      (lon) float32 -179.875 -179.625 -179.375 -179.125 -178.875 ...
+      * time     (time) datetime64[ns] 2054-01-01T12:00:00 2054-01-02T12:00:00 ...
+      * lat      (lat) float32 -89.875 -89.625 -89.375 -89.125 -88.875 -88.625 ...
+    Data variables:
+        tas      (time, lat, lon) float32 272.935 272.937 272.931 272.911 ...
+    Attributes:
+        version:         1.0
+        repo:            https://gitlab.com/ClimateImpactLab/make_tas/
+        frequency:       annual
+        oneline:         Average Daily Temperature, tavg
+        file:            tas.py
+        year:            2054
+        write_variable:  tas
+        description:     Average Daily Temperature, tavg\n\n Average Daily Temper...
+        execute:         python tas.py run
+        project:         gcp
+        team:            climate
+        dependencies:    ['/global/scratch/groups/co_laika/gcp/climate/nasa_bcsd/...
+        model:           NorESM1-M
+
+
 
 Running your job
 ~~~~~~~~~~~~~~~~
