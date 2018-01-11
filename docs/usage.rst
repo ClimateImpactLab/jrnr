@@ -50,7 +50,7 @@ Frequently, you'll want to do some basic debugging and iteration to make sure yo
         model:           NorESM1-M
 
 
-As you can see, if you setting up logging, the logging information will print to the terminal to your terminal se
+As you can see, if you setting up logging, the logging information will print to wherever you direct stdout. In this case, ininteractive mode, it prints to the ipython terminal. In batch mode, jrnr logs can be found in the directory you specified as ``run-{job_name}-{job_id}-{task-id}.log``. 
 
 
 
@@ -138,8 +138,63 @@ Notice that we use the unique id `001` and the jobname `tas` that we used when w
 
 
 Technical note
---------------
+~~~~~~~~~~~~~~
 
 How does this `jrnr` track the status of my jobs? 
+-------------------------------------------------
 
 In your directory where you are running your job, `jrnr` creates a `locks` directory. In this `locks` directory, for each job in your set of batch jobs a file is created with the following structure `{job_name}-{unique_id}-{job_index}.` When a node is working on a job, it adds the `.lck` file extension to the file. When the job is completed, it converts the `.lck` extension to a `.done` extension. If, for some reason, the job encounters an error, the extension will shift to `.err`. When you call the `status` command `jrnr` is just displaying the count of files with each file extension in the locks directory. 
+
+
+How does `jrnr` construct a job specification?
+----------------------------------------------
+
+Each `jrnr` job can be specified with arguments from key, value dictionaries. Since these arguments are taken from a set of known possible inputs we can take each key and its associated set of possible values and compute the cartesian product of every key, value combination. In the background of `jrnr`, we take lists of dictionaries and use the python method `itertools.product` to specify the superset of possible batch jobs. An demonstration is below: 
+
+
+.. code-block:: ipython
+
+  In [1]: def generate_jobs(job_spec):
+            for specs in itertools.product(*job_spec):
+              yield _unpack_job(specs)
+
+
+  In [2]: def _unpack_job(specs):
+              job = {}
+              for spec in specs:
+                  job.update(spec)
+              return job
+
+
+  In [3]: MODELS = list(map(lambda x: dict(model=x), [
+          'ACCESS1-0',
+          'bcc-csm1-1',
+          'BNU-ESM',
+          'CanESM2',
+          ]))
+
+  In [4]: PERIODS = (
+          [dict(scenario='historical', year=y) for y in range(1981, 2006)] +
+          [dict(scenario='rcp45',  year=y) for y in range(2006, 2100)]
+
+  In [5]: job_spec = [PERIODS, MODELS]
+
+  In [6]: jobs = list(generate_jobs(job_spec))
+
+  In [7]: jobs[:100:10]
+  Out[7]:
+  [{'model': 'ACCESS1-0', 'scenario': 'historical', 'year': 1981},
+  {'model': 'BNU-ESM', 'scenario': 'historical', 'year': 1983},
+  {'model': 'ACCESS1-0', 'scenario': 'historical', 'year': 1986},
+  {'model': 'BNU-ESM', 'scenario': 'historical', 'year': 1988},
+  {'model': 'ACCESS1-0', 'scenario': 'historical', 'year': 1991},
+  {'model': 'BNU-ESM', 'scenario': 'historical', 'year': 1993},
+  {'model': 'ACCESS1-0', 'scenario': 'historical', 'year': 1996},
+  {'model': 'BNU-ESM', 'scenario': 'historical', 'year': 1998},
+  {'model': 'ACCESS1-0', 'scenario': 'historical', 'year': 2001},
+  {'model': 'BNU-ESM', 'scenario': 'historical', 'year': 2003}]
+
+
+
+
+
