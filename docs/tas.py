@@ -1,11 +1,19 @@
 '''
-Average Daily Temperature, tavg
 
-Average Daily Temperature is computed as the average of the 
-daily maximum temperature and the daily minimum temperature.
+This module demonstrates the specification of a jrnr script
 
-version 1.0 initial release
+This jrnr script will compute daily average temperature 
+as a the average of daily max and min temperature. 
 
+To run jrnr requires a parameterized job spec. This is constructed 
+as a list on line 105 and handed to jrnr's `slurm_runner` decorator on line 123.
+
+Each job, interactive and batch, in jrnr receives a 
+dictionary fully parameterizing the input arguments. 
+
+To parameterize your job spec jrnr takes the 
+cartesian product of the items in lists of dictionaries. 
+`JOB_SPEC` on line 112 is simply a list of those lists. 
 '''
 
 import os
