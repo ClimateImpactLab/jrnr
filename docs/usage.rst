@@ -143,4 +143,3 @@ Technical note
 How does this `jrnr` track the status of my jobs? 
 
 In your directory where you are running your job, `jrnr` creates a `locks` directory. In this `locks` directory, for each job in your set of batch jobs a file is created with the following structure `{job_name}-{unique_id}-{job_index}.` When a node is working on a job, it adds the `.lck` file extension to the file. When the job is completed, it converts the `.lck` extension to a `.done` extension. If, for some reason, the job encounters an error, the extension will shift to `.err`. When you call the `status` command `jrnr` is just displaying the count of files with each file extension in the locks directory. 
-
