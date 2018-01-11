@@ -67,7 +67,7 @@ python:
 - 2.7
 script:
 - if [[ "$TEST_ENV" == "conda" ]]; then
-    export PATH=$HOME/miniconda/bin:$PATH;
+    export PATH="$HOME/miniconda/bin:$PATH";
     source activate test-env;
     python -m pytest;
     sphinx-apidoc -o docs jrnr;
