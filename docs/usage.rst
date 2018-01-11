@@ -16,13 +16,13 @@ Running your job
 
 The `slurm_runner` decorator function in `jrnr` acts as a wrapper around your main function. Make sure that above your main function you have added `@slurm_runner()`. With this enabled, you can use the command line to launch your jobs on the `slurm workload manager <https://slurm.schedmd.com/>`_. 
 
-Make sure you are in the directory where your python module is located. Let's say we are running the job specified in `tas_poly_bcsd.py`. Let's look at what the `help` function does. 
+Make sure you are in the directory where your python module is located. Let's say we are running the job specified in `tas.py`. Let's look at what the `help` function does. 
 
 .. code-block:: bash
 
-    $ python tas_poly_bcsd.py --help
+    $ python tas.py --help
 
-    Usage: tas_poly_bcsd.py [OPTIONS] COMMAND [ARGS]...
+    Usage: tas.py [OPTIONS] COMMAND [ARGS]...
 
     Options:
       --help  Show this message and exit.
@@ -47,7 +47,7 @@ Let's first have a look at the options with the run command.
 
     $ python run --help
 
-    Usage: tas_poly_bcsd.py run [OPTIONS]
+    Usage: tas.py run [OPTIONS]
 
     Options:
       -l, --limit INTEGER          Number of iterations to run
@@ -64,15 +64,15 @@ The most important options are `u`, `j` and `L`. To specify a job you need `u` a
 
 .. code-block:: bash
 
-    $ python tas_poly_bcsd.py run -u 001 -j tas_poly 
+    $ python tas.py run -u 001 -j tas 
 
-This creates a job with a unique id of `001` and a job name of `tas_poly`.
+This creates a job with a unique id of `001` and a job name of `tas`.
 
 By specifying some of the options listed above, you can adjust the behavior of your slurm jobs. For example, you can put your log files in a specific directory by specifying a value for argument `L`. Additionally, if you want to use a specific partition on your cluster you can specify the `p` option. Similarly, if your job is particularly compute intensive, with `n` you can adjust the number of jobs per node.
 
 .. code-block:: bash
 
-    $ python tas_poly_bcsd.py run -u 001 -j tas_poly -L /logs/tas_poly/ -p savio2_bigmem -n 10
+    $ python tas.py run -u 001 -j tas -L /logs/tas/ -p savio2_bigmem -n 10
 
 Its important to note that, by default, log files will be written to the directory where you are executing the file. Depending on how large your job is you may want to put these log files elsewhere. 
 
@@ -80,18 +80,18 @@ Its important to note that, by default, log files will be written to the directo
 `status`
 ~~~~~~~~
 
-You launched your job 10 minutes ago and you want to check on the status of your jobs. We can check with the `status` option. Let's look again at our `tas_poly_bcsd.py` file. 
+You launched your job 10 minutes ago and you want to check on the status of your jobs. We can check with the `status` option. Let's look again at our `tas.py` file. 
 
 .. code-block:: bash
 
-    $ python tas_poly_bcsd.py status -u 001 -j tas_poly
+    $ python tas.py status -u 001 -j tas
 
     jobs:          4473
     done:          3000
     in progress:   1470
     errored:          3
 
-Notice that we use the unique id `001` and the jobname `tas_poly` that we used when we created the job. You must use these values or we cannot compute the progress of our job.
+Notice that we use the unique id `001` and the jobname `tas` that we used when we created the job. You must use these values or we cannot compute the progress of our job.
 
 
 Technical note
