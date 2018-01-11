@@ -5,11 +5,11 @@ This module demonstrates the specification of a jrnr script
 This jrnr script will compute daily average temperature 
 as a the average of daily max and min temperature. 
 
-To run jrnr requires a parameterized job spec. This is constructed 
+To run, jrnr requires a parameterized job spec. This is constructed 
 as a list on line 105 and handed to jrnr's `slurm_runner` decorator on line 123.
 
 Each job, interactive and batch, in jrnr receives a 
-dictionary fully parameterizing the input arguments. 
+dictionary which fully parameterizes the input arguments. 
 
 To parameterize your job spec jrnr takes the 
 cartesian product of the items in lists of dictionaries. 
