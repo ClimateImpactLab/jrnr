@@ -534,6 +534,8 @@ def slurm_runner(
                 run_job(**job_kwargs)
 
             except (KeyboardInterrupt, SystemExit):
+                logger.error('{} interupted, removing .lck file before exiting'.format(task_id))
+                os.remove(lock_file.format('lck'))
                 raise
 
             except Exception as e:
