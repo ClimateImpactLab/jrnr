@@ -2,7 +2,14 @@
 History
 =======
 
-0.2.1 (Current Version)
+0.2.2 (Current Version)
+-----------------------
+
+* Update to documentation
+
+* ``jrnr`` attempts to remove ``.lck`` files if there is a keyboard interrupt or system exit
+
+0.2.1 
 -----------------------
 
 * Fix bug in ``slurm_runner.do_job`` which caused job duplication when race conditions on lock object creation occur (:issue:`3`)

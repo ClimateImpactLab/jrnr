@@ -50,6 +50,9 @@ Frequently, you'll want to do some basic debugging and iteration to make sure yo
         model:           NorESM1-M
 
 
+As you can see, if you setting up logging, the logging information will print to the terminal to your terminal se
+
+
 
 Running your job
 ~~~~~~~~~~~~~~~~
