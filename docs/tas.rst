@@ -1,8 +1,6 @@
-:orphan:
-
 .. _tas:
 
-Example ``jrnr`` script
+Example `jrnr` script
 ======================================
 
 .. literalinclude:: tas.py

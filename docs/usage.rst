@@ -2,7 +2,7 @@
 Usage
 =====
 
-`jrnr` is a python library currently configured to work on systems using `slurm workload managers <https://slurm.schedmd.com/>`_. If your computing workflows can be parallelized, `jrnr` can help.
+``jrnr`` is a python library currently configured to work on systems using `slurm workload managers <https://slurm.schedmd.com/>`_. If your computing workflows can be parallelized, `jrnr` can help.
 
 `jrnr` is an application that relies on `click <http://click.pocoo.org/5/>`_, the python command line tool. 
 
@@ -13,9 +13,9 @@ At the top of your python module add this to the `import` section::
 Interactive mode
 ~~~~~~~~~~~~~~~~
 
-Frequently, you'll want to do some basic debugging and iteration to make sure your batch jobs will run as expected. To assist this process, `jrnr` has an interactive mode that allows you to run a single job in an `ipython` session. 
+Frequently, you'll want to do some basic debugging and iteration to make sure your batch jobs will run as expected. To assist this process, ``jrnr`` has an interactive mode that allows you to run a single job in an `ipython` session. 
 
-.. code-block:: ipython
+.. code-block:: python
 
     In [1]: import tas
 
@@ -36,7 +36,7 @@ Frequently, you'll want to do some basic debugging and iteration to make sure yo
         tas      (time, lat, lon) float32 272.935 272.937 272.931 272.911 ...
     Attributes:
         version:         1.0
-        repo:            https://gitlab.com/ClimateImpactLab/make_tas/
+        repo:            https://gitlab.com/ClimateImpactLab/tas/
         frequency:       annual
         oneline:         Average Daily Temperature, tavg
         file:            tas.py
@@ -57,9 +57,9 @@ As you can see, if you setting up logging, the logging information will print to
 Running your job
 ~~~~~~~~~~~~~~~~
 
-The `slurm_runner` decorator function in `jrnr` acts as a wrapper around your main function. Make sure that above your main function you have added `@slurm_runner()`. With this enabled, you can use the command line to launch your jobs on the `slurm workload manager <https://slurm.schedmd.com/>`_. 
+The ``slurm_runner`` decorator function in `jrnr` acts as a wrapper around your main function. Make sure that above your main function you have added ``@slurm_runner()``. With this enabled, you can use the command line to launch your jobs on the `slurm workload manager <https://slurm.schedmd.com/>`_. 
 
-Make sure you are in the directory where your python module is located. Let's say we are running the job specified in `tas.py`. Let's look at what the `help` function does. 
+Make sure you are in the directory where your python module is located. Let's say we are running the job specified in :doc:`tas`. Let's look at what the `help` function does. 
 
 .. code-block:: bash
 
@@ -152,7 +152,7 @@ How does `jrnr` construct a job specification?
 Each `jrnr` job can be specified with arguments from key, value dictionaries. Since these arguments are taken from a set of known possible inputs we can take each key and its associated set of possible values and compute the cartesian product of every key, value combination. In the background of `jrnr`, we take lists of dictionaries and use the python method `itertools.product` to specify the superset of possible batch jobs. A demonstration is below: 
 
 
-.. code-block:: ipython
+.. code-block:: python
 
   In [1]: def generate_jobs(job_spec):
             for specs in itertools.product(*job_spec):

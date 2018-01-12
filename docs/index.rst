@@ -13,6 +13,7 @@ Contents:
    contributing
    authors
    history
+   tas
 
 Indices and tables
 ==================
