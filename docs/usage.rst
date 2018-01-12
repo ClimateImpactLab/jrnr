@@ -149,7 +149,7 @@ In your directory where you are running your job, `jrnr` creates a `locks` direc
 How does `jrnr` construct a job specification?
 ----------------------------------------------
 
-Each `jrnr` job can be specified with arguments from key, value dictionaries. Since these arguments are taken from a set of known possible inputs we can take each key and its associated set of possible values and compute the cartesian product of every key, value combination. In the background of `jrnr`, we take lists of dictionaries and use the python method `itertools.product` to specify the superset of possible batch jobs. An demonstration is below: 
+Each `jrnr` job can be specified with arguments from key, value dictionaries. Since these arguments are taken from a set of known possible inputs we can take each key and its associated set of possible values and compute the cartesian product of every key, value combination. In the background of `jrnr`, we take lists of dictionaries and use the python method `itertools.product` to specify the superset of possible batch jobs. A demonstration is below: 
 
 
 .. code-block:: ipython
