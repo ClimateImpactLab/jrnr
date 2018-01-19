@@ -123,6 +123,7 @@ Its important to note that, by default, log files will be written to the directo
 If you want to pfully take advantage BRC's computing capacity you can run  
 
 .. code-block:: bash
+
     $ python tas.py run -u 001 -j tas -L /logs/tas/ -p savio_bigmem -n 10
       run job: 100
       on-finish job: 101
