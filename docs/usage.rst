@@ -120,13 +120,13 @@ By specifying some of the options listed above, you can adjust the behavior of y
 Its important to note that, by default, log files will be written to the directory where you are executing the file. Depending on how large your job is you may want to put these log files elsewhere. 
 
 
-If you want to pfully take advantage BRC's computing capacity you can run  
+If you want to fully take advantage of BRC's computing capacity you can run  
 
 .. code-block:: bash
 
     $ python tas.py run -u 001 -j tas -L /logs/tas/ -p savio_bigmem -n 10
-      run job: 100
-      on-finish job: 101
+      run job: 98
+      on-finish job: 99
     $ python tas.py run -u 001 -j tas -L /logs/tas/ -p savio2_bigmem -n 10
       run job: 100
       on-finish job: 101
@@ -194,7 +194,7 @@ Each ``jrnr`` job can be specified with arguments from key, value dictionaries. 
 
   In [4]: PERIODS = (
           [dict(scenario='historical', year=y) for y in range(1981, 2006)] +
-          [dict(scenario='rcp45',  year=y) for y in range(2006, 2100)]
+          [dict(scenario='rcp45',  year=y) for y in range(2006, 2100)])
 
   In [5]: job_spec = [PERIODS, MODELS]
 
