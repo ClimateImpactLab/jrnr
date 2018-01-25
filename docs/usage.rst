@@ -54,8 +54,8 @@ As you can see, if you setting up logging, the logging information will print to
 
 
 
-Running your job
-~~~~~~~~~~~~~~~~
+Running your job in batch mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``slurm_runner`` decorator function in ``jrnr`` acts as a wrapper around your main function. Make sure that above your main function you have added ``@slurm_runner()``. With this enabled, you can use the command line to launch your jobs on the `slurm workload manager <https://slurm.schedmd.com/>`_. 
 
@@ -137,6 +137,11 @@ If you want to fully take advantage of BRC's computing capacity you can run
       run job: 106
       on-finish job: 107
 
+
+
+How many jobs should you run on each node? 
+
+To determine this, you'll need to divide the amount of memory per node by the amount of memory required by your job. To determine the amount of memory per node, you can look at the `Savio user guide <http://research-it.berkeley.edu/services/high-performance-computing/user-guide/savio-user-guide>`_. For example, if I have a job that requires 6GB of RAM and I am running on the ``savio2_bigmem`` partition. Then we'll add 2GB of buffer to our 6GB RAM requirement and take the result of ``128/8`` to get 16 jobs. 
 
 
 ``status``
