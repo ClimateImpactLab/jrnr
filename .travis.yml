@@ -57,13 +57,9 @@ install:
   fi
 
 language: python
-matrix:
-  allow_failures:
-  - env: TEST_ENV=conda
-    python: 3.4
 python:
 - 3.5
-- 3.4
+- 3.6
 - 2.7
 script:
 - if [[ "$TEST_ENV" == "conda" ]]; then
