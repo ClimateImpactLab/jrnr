@@ -36,7 +36,7 @@ SLURM_SCRIPT = '''
 #SBATCH --account=co_laika
 #
 # QoS:
-#SBATCH --qos=savio_lowprio
+#SBATCH --qos={qos}
 #
 #SBATCH --nodes=1
 #
@@ -110,6 +110,7 @@ def _prep_slurm(
         filepath,
         jobname='slurm_job',
         partition='savio2',
+        qos='savio2_lowprio',
         job_spec=None,
         limit=None,
         uniqueid='"${SLURM_ARRAY_JOB_ID}"',
@@ -161,6 +162,7 @@ def _prep_slurm(
         f.write(template.format(
             jobname=jobname,
             partition=partition,
+            qos=qos,
             numjobs=numjobs,
             jobs_per_node=jobs_per_node,
             maxnodes=(maxnodes-1),
@@ -176,6 +178,7 @@ def run_slurm(
         filepath,
         jobname='slurm_job',
         partition='savio2',
+        qos='savio2_lowprio',
         job_spec=None,
         limit=None,
         uniqueid='"${SLURM_ARRAY_JOB_ID}"',
@@ -189,6 +192,7 @@ def run_slurm(
         filepath=filepath,
         jobname=jobname,
         partition=partition,
+        qos=qos,
         job_spec=job_spec,
         limit=limit,
         uniqueid=uniqueid,
@@ -363,6 +367,8 @@ def slurm_runner(
         '--jobname', '-j', default='test', help='name of the job')
     @click.option(
         '--partition', '-p', default='savio2', help='resource on which to run')
+    @click.option(
+        '--qos', '-q', default='savio2_lowprio', help='QOS for job')
     @click.option('--dependency', '-d', type=int, multiple=True)
     @click.option(
         '--logdir', '-L', default='log', help='Directory to write log files')
@@ -375,6 +381,7 @@ def slurm_runner(
             jobname='slurm_job',
             dependency=None,
             partition='savio2',
+            qos='savio2_lowprio'
             maxnodes=100,
             logdir='log',
             uniqueid='"${SLURM_ARRAY_JOB_ID}"'):
@@ -383,6 +390,7 @@ def slurm_runner(
             filepath=filepath,
             jobname=jobname,
             partition=partition,
+            qos=qos,
             job_spec=job_spec,
             jobs_per_node=jobs_per_node,
             maxnodes=maxnodes,
@@ -406,18 +414,22 @@ def slurm_runner(
     @click.option(
         '--partition', '-p', default='savio2', help='resource on which to run')
     @click.option(
+        '--qos', '-q', default='savio2_lowprio', help='QOS for job')
+    @click.option(
         '--dependency', '-d', type=int, multiple=True)
     @click.option(
         '--logdir', '-L', default='log', help='Directory to write log files')
     @click.option(
         '--uniqueid', '-u', default='"${SLURM_ARRAY_JOB_ID}"',
         help='Unique job pool id')
+
     def run(
             limit=None,
             jobs_per_node=24,
             jobname='slurm_job',
             dependency=None,
             partition='savio2',
+            qos='savio2_lowprio',
             maxnodes=100,
             logdir='log',
             uniqueid='"${SLURM_ARRAY_JOB_ID}"'):
@@ -429,6 +441,7 @@ def slurm_runner(
             filepath=filepath,
             jobname=jobname,
             partition=partition,
+            qos=qos,
             job_spec=job_spec,
             jobs_per_node=jobs_per_node,
             maxnodes=maxnodes,
@@ -441,6 +454,7 @@ def slurm_runner(
             filepath=filepath,
             jobname=jobname+'_finish',
             partition=partition,
+            qos=qos, 
             dependencies=('afterany', [slurm_id]),
             logdir=logdir,
             flags=['cleanup', slurm_id])
