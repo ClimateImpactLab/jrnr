@@ -381,7 +381,7 @@ def slurm_runner(
             jobname='slurm_job',
             dependency=None,
             partition='savio2',
-            qos='savio_lowprio', 
+            qos='savio_lowprio',
             maxnodes=100,
             logdir='log',
             uniqueid='"${SLURM_ARRAY_JOB_ID}"'):
@@ -433,7 +433,6 @@ def slurm_runner(
             maxnodes=100,
             logdir='log',
             uniqueid='"${SLURM_ARRAY_JOB_ID}"'):
-
         if not os.path.isdir(logdir):
             os.makedirs(logdir)
 
@@ -454,7 +453,7 @@ def slurm_runner(
             filepath=filepath,
             jobname=jobname+'_finish',
             partition=partition,
-            qos=qos, 
+            qos=qos,
             dependencies=('afterany', [slurm_id]),
             logdir=logdir,
             flags=['cleanup', slurm_id])
@@ -548,7 +547,6 @@ def slurm_runner(
                 run_job(**job_kwargs)
 
             except (KeyboardInterrupt, SystemExit):
-                
                 try:
                     logger.error('{} interupted, removing .lck file before exiting'.format(task_id))
                     os.remove(lock_file.format('lck'))
