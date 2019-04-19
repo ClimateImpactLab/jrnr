@@ -381,7 +381,7 @@ def slurm_runner(
             jobname='slurm_job',
             dependency=None,
             partition='savio2',
-            qos='savio_lowprio'
+            qos='savio_lowprio', 
             maxnodes=100,
             logdir='log',
             uniqueid='"${SLURM_ARRAY_JOB_ID}"'):
