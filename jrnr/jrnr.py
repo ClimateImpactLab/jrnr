@@ -76,6 +76,11 @@ python {filepath} {flags}
 '''
 
 
+def _normalize(name):
+    ''' normalize click commands with underscores to dashes for click>=7.0 compatability '''
+    return name.replace("_", "-")
+
+
 def _product(values):
     '''
     Examples
@@ -345,7 +350,7 @@ def slurm_runner(
 
         warnings.warn(warning, FutureWarning)
 
-    @click.group()
+    @click.group(context_settings={"token_normalize_func": _normalize})
     def slurm():
         pass
 
