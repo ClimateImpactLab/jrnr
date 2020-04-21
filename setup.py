@@ -31,10 +31,10 @@ setup(
     name='jrnr',
     version='0.2.4',
     description="Job Runner for Climate Impact Lab Jobs",
-    long_description=readme + '\n\n' + history,
-    author="Justin Simcock",
-    author_email='jsimcock@rhg.com',
-    url='https://github.com/ClimateImpactLab/jrnr',
+    long_description=readme,
+    author="Michael Delgado",
+    author_email='mdelgado@rhg.com',
+    url='https://upload.pypi.org/legacy/',
     packages=find_packages(include=['jrnr']),
     entry_points={
         'console_scripts': [

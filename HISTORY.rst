@@ -2,14 +2,24 @@
 History
 =======
 
-0.2.2 (Current Version)
+0.2.4 (2020-04-21)
+------------------
+
+* Compatibility patch allowing commands with underscores to be normalized to dashes in click app returned by jrnr.jrnr.slurm_runner. Thanks for the digging and issue raising @simondgreenhill!
+
+0.2.3 (2018-01-16)
+------------------
+
+* Documentation & testing improvements
+
+0.2.2 (2017-08-28)
 -----------------------
 
 * Update to documentation
 
 * ``jrnr`` attempts to remove ``.lck`` files if there is a keyboard interrupt or system exit
 
-0.2.1 
+0.2.1 (2017-07-31)
 -----------------------
 
 * Fix bug in ``slurm_runner.do_job`` which caused job duplication when race conditions on lock object creation occur (:issue:`3`)
