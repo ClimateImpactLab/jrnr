@@ -29,7 +29,7 @@ test_requirements = [
 
 setup(
     name='jrnr',
-    version='0.2.2',
+    version='0.2.4',
     description="Job Runner for Climate Impact Lab Jobs",
     long_description=readme + '\n\n' + history,
     author="Justin Simcock",
@@ -51,12 +51,10 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
     test_suite='tests',
     tests_require=test_requirements,
