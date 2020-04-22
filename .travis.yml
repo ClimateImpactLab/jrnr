@@ -6,7 +6,7 @@ deploy:
     python: 2.7
     repo: ClimateImpactLab/jrnr
   on:
-    branch: master
+    tags: true
   distributions: sdist bdist_wheel
   user: justin_gerard
   provider: pypi
