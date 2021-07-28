@@ -101,6 +101,7 @@ Let's first have a look at the options with the run command.
       -d, --dependency INTEGER
       -L, --logdir TEXT            Directory to write log files
       -u, --uniqueid TEXT          Unique job pool id
+      -q, --qos TEXT               QOS setting
       --help                       Show this message and exit.
 
 The most important options are ``u``, ``j`` and ``L``. To specify a job you need ``u`` and ``j`` since these parameters uniquely identify a job and allow you to track the progress of your jobs. An example command is below
@@ -111,13 +112,13 @@ The most important options are ``u``, ``j`` and ``L``. To specify a job you need
 
 This creates a job with a unique id of `001` and a job name of `tas`.
 
-By specifying some of the options listed above, you can adjust the behavior of your slurm jobs. For example, you can put your log files in a specific directory by specifying a value for argument ``L``. Additionally, if you want to use a specific partition on your cluster you can speify the `p` option. Similarly, if your job is particularly compute intensive, with ``n`` you can adjust the number of jobs per node.
+By specifying some of the options listed above, you can adjust the behavior of your slurm jobs. For example, you can put your log files in a specific directory by specifying a value for argument ``L``. Additionally, if you want to use a specific partition on your cluster you can specify the `p` option. Similarly, if your job is particularly compute intensive, with ``n`` you can adjust the number of jobs per node.
 
 .. code-block:: bash
 
     $ python tas.py run -u 001 -j tas -L /logs/tas/ -p savio2_bigmem -n 10
 
-Its important to note that, by default, log files will be written to the directory where you are executing the file. Depending on how large your job is you may want to put these log files elsewhere. 
+It is important to note that, by default, log files will be written to the directory where you are executing the file. Depending on how large your job is you may want to put these log files elsewhere. 
 
 
 If you want to fully take advantage of BRC's computing capacity you can run  
